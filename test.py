@@ -8,22 +8,22 @@ class MyController(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
-                
-    def on_x_press(self):
         servoPIN = 17
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(servoPIN, GPIO.OUT)
-        p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
-        p.start(2.5) # Initialization
+        self.p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
+        self.p.start(2.5) # Initialization
+        
+    def on_x_press(self):
+        
         print("Hello world")
-        p.ChangeDutyCycle(5)
-        time.sleep(0.5)
+        self.p.ChangeDutyCycle(5)
+        
 
-    def on_x_release(self):
+    def on_square_press(self):
         print("Goodbye world")
-        p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
-        p.ChangeDutyCycle(12)
-        time.sleep(0.5)
+        self.p.ChangeDutyCycle(12)
+        
 
 
 
