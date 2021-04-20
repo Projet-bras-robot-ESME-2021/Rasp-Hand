@@ -1,2 +1,8 @@
+Connect PS4 Joystick: 
 https://pypi.org/project/pyPS4Controller/
+
+Control ServoMotors :
 https://raspberrypi-tutorials.fr/controle-du-servo-moteur-de-raspberry-pi/
+
+Create an interpreter :
+https://docs.python.org/fr/3/tutorial/venv.html
