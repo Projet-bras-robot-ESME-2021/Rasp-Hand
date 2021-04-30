@@ -2,12 +2,12 @@ from Motor_Config import MotorControl
 from PSJoystick import MyController
 
 def init_all():
-    motor_Base=MotorControl(GPIO_Motor=27,initpos=8.5)
-    motor_Art1=MotorControl(GPIO_Motor=17)
+    base_motor=MotorControl(gpio_motor=27,initpos=8.5)
+    art1_motor=MotorControl(gpio_motor=17)
     
     motorDict= {
-        "MotorBase":motor_Base,
-        "MotorArt1":motor_Art1
+        "motor_base":base_motor,
+        "motor_art_1":art1_motor
         }
     
     controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True,motorsDico=motorDict)

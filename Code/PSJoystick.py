@@ -8,43 +8,44 @@ from Motor_Config import MotorControl
 
 class MyController(Controller):
 
-    def __init__(self,motorsDico, **kwargs):
+    def __init__(self,motors_dico, **kwargs):
         Controller.__init__(self, **kwargs)
-        self.MC=motorsDico
+        self.MC=motors_dico
         self.incre=0
         
+
     def on_x_press(self):
         print("on_x_press")
-        self.MC["MotorArt1"].MoveMotor(4)
+        self.MC["motor_base"].move_min()
         
-
     def on_x_release(self):
         print("on_x_release")
-        self.MC["MotorArt1"].StopNow()
+        self.MC["motor_base"].stop_now()
         
     def on_triangle_press(self):
         print("on_triangle_press")
-        self.MC["MotorArt1"].MoveMotor(15)
+        self.MC["motor_base"].move_max()
 
     def on_triangle_release(self):
         print("on_triangle_release")
-        self.MC["MotorArt1"].StopNow()
+        self.MC["motor_base"].stop_now()
+
 
     def on_circle_press(self):
         print("on_circle_press")
-        self.MC["MotorBase"].MoveMotor(4)
+        self.MC["motor_art_1"].move_min()
 
     def on_circle_release(self):
         print("on_circle_release")
-        self.MC["MotorBase"].StopNow()
+        self.MC["motor_art_1"].stop_now()
 
     def on_square_press(self):
         print("on_square_press")
-        self.MC["MotorBase"].MoveMotor(15)
+        self.MC["motor_art_1"].move_max()
 
     def on_square_release(self):
         print("on_square_release")
-        self.MC["MotorBase"].StopNow()
+        self.MC["motor_art_1"].stop_now()
         
         
         
@@ -52,13 +53,13 @@ class MyController(Controller):
         print("on_L3_up")
         if self.incre>2:
             self.incre-=1
-            self.MC["MotorArt1"].MoveMotor(self.incre)
+            self.MC["motor_art_1"].move_motor(self.incre)
 
     def on_L3_down(self, value):
         print("on_L3_down")
         if self.incre<12:
             self.incre+=1
-            self.MC["MotorArt1"].MoveMotor(self.incre)
+            self.MC["motor_art_1"].move_motor(self.incre)
 
     def on_L3_left(self, value):
         print("on_L3_left ")
@@ -69,12 +70,12 @@ class MyController(Controller):
     def on_L3_y_at_rest(self):
         """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_y_at_rest")
-        self.MC["MotorArt1"].StopNow()
+        self.MC["motor_art_1"].stop_now()
 
     def on_L3_x_at_rest(self):
         """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_x_at_rest")
-        self.MC["MotorArt1"].StopNow()
+        self.MC["motor_art_1"].stop_now()
         
         
         
