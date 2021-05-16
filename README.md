@@ -1,3 +1,6 @@
 ## Rasp-Hand project
-##Hello from the outside
 ##Sunday 16/05 Warith mod
+##git commit -a
+##git push
+
+## pull push works on Raspberry
