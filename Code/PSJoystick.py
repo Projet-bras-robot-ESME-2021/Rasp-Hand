@@ -34,11 +34,15 @@ class MyController(Controller):
     def on_circle_press(self):
         print("on_circle_press")
         self.MC["motor_pince"].move_min()
-
+	self.secondsbase=time.time()
+	self.compteur=0
+	while(self.secondsbase-time.time()=4):
+		self.compteur+=1
     def on_circle_release(self):
         print("on_circle_release")
         self.MC["motor_pince"].stop_now()
-
+	print(self.compteur)
+	
     def on_square_press(self):
         print("on_square_press")
         self.MC["motor_pince"].move_max()
