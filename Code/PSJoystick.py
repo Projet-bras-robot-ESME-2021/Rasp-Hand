@@ -33,34 +33,28 @@ class MyController(Controller):
 
     def on_circle_press(self):
         print("on_circle_press")
-        self.MC["motor_art_1"].move_min()
+        self.MC["motor_pince"].move_min()
 
     def on_circle_release(self):
         print("on_circle_release")
-        self.MC["motor_art_1"].stop_now()
+        self.MC["motor_pince"].stop_now()
 
     def on_square_press(self):
         print("on_square_press")
-        self.MC["motor_art_1"].move_max()
+        self.MC["motor_pince"].move_max()
 
     def on_square_release(self):
         print("on_square_release")
-        self.MC["motor_art_1"].stop_now()
+        self.MC["motor_pince"].stop_now()
         
         
         
     def on_L3_up(self, value):
         print("on_L3_up")
-        if self.incre>2:
-            self.incre-=1
-            self.MC["motor_art_1"].move_motor(self.incre)
 
     def on_L3_down(self, value):
         print("on_L3_down")
-        if self.incre<12:
-            self.incre+=1
-            self.MC["motor_art_1"].move_motor(self.incre)
-
+    
     def on_L3_left(self, value):
         print("on_L3_left ")
 
@@ -70,12 +64,10 @@ class MyController(Controller):
     def on_L3_y_at_rest(self):
         """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_y_at_rest")
-        self.MC["motor_art_1"].stop_now()
 
     def on_L3_x_at_rest(self):
         """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_x_at_rest")
-        self.MC["motor_art_1"].stop_now()
         
         
         
