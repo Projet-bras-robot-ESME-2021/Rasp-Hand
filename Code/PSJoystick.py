@@ -11,7 +11,6 @@ class MyController(Controller):
     def __init__(self,motors_dico, **kwargs):
         Controller.__init__(self, **kwargs)
         self.MC=motors_dico
-        self.incre=0
         
 
     def on_x_press(self):
@@ -28,7 +27,6 @@ class MyController(Controller):
 
     def on_triangle_release(self):
         print("on_triangle_release")
-        self.MC["motor_base"].stop_now()
 
 
     def on_circle_press(self):

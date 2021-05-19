@@ -1,8 +1,15 @@
 import RPi.GPIO as GPIO
 import time
+import os
+from Motor_Config import MotorControl
+from PSJoystick import MyController
+
+
 
 class Keypad:
-    def __init__(self):
+    def __init__(self,motors_dico):
+        
+        self.MC=motors_dico
         
         Row1=14
         Row2=15
@@ -35,100 +42,117 @@ class Keypad:
 
         self.adresseRow=[Row1,Row2,Row3,Row4]
         self.adresseCol=[Col1, Col2, Col3, Col4]
-        self.press_function= [self.do_none,self.turn_left,self.do_none,self.do_none,
-                              self.forward,self.do_none,self.backward,self.do_none,
-                              self.do_none,self.turn_right,self.do_none,self.do_none,
-                              self.do_none,self.do_none,self.do_none,self.do_none]
-        self.unpress_function= [self.do_none,self.stop_turn_left,self.do_none,self.do_none,
-                                self.stop_forward,self.do_none,self.stop_backward,self.do_none,
-                                self.do_none,self.stop_turn_right,self.do_none,self.do_none,
-                                self.do_none,self.do_none,self.do_none,self.do_none]
+        self.press_function= [self.do_none,self.key_4,self.do_none,self.do_none,
+                              self.key_2,self.do_none,self.key_8,self.do_none,
+                              self.do_none,self.key_6,self.do_none,self.do_none,
+                              self.do_none,self.key_B,self.do_none,self.do_none]
+        self.unpress_function= [self.do_none,self.unkey_4,self.do_none,self.do_none,
+                                self.unkey_2,self.do_none,self.unkey_8,self.do_none,
+                                self.do_none,self.unkey_6,self.do_none,self.do_none,
+                                self.do_none,self.unkey_B,self.do_none,self.do_none]
         self.nombreused= ['1','4','7','*',
                           '2','5','8','0',
                           '3','6','9','#',
                           'A','B','C','D']
         
     def listener(self):
-        i=0
-        j=0
+        col_number=0
+        row_number=0
 
         print("c'est initialisé")
 
-        while i<4:
+        while col_number<4:
             value=GPIO.input(self.adresseCol[0])
             value2=GPIO.input(self.adresseCol[1])
             value3=GPIO.input(self.adresseCol[2])
             value4=GPIO.input(self.adresseCol[3])
-            valueused = [value, value2, value3, value4]
+            which_col = [value, value2, value3, value4]
 
-            if valueused[i]!=0 :
-                j=0
+            if which_col[col_number]!=0 :
+                row_number=0
                 time.sleep(0.1)
-                while j<4 :
-                    GPIO.output(self.adresseRow[j], GPIO.LOW)
+                while row_number<4 :
+                    GPIO.output(self.adresseRow[row_number], GPIO.LOW)
                                
-                    valueused[i]= GPIO.input(self.adresseCol[i])
-                    if valueused[i]==0 :
+                    which_col[col_number]= GPIO.input(self.adresseCol[col_number])
+                    if which_col[col_number]==0 :
                         
                         GPIO.output(self.adresseRow[0], GPIO.HIGH)
                         GPIO.output(self.adresseRow[1], GPIO.HIGH)
                         GPIO.output(self.adresseRow[2], GPIO.HIGH)
                         GPIO.output(self.adresseRow[3], GPIO.HIGH)
-                        valueused[i]= GPIO.input(self.adresseCol[i])
-                        variable1= i*4 +j
                         
-                        self.press_function[variable1]()
+                        which_col[col_number]= GPIO.input(self.adresseCol[col_number])
+                        pressed_key= col_number*4 +row_number
+                        
+                        self.press_function[pressed_key](self.nombreused[pressed_key])
                         
                         
-                        while(valueused[i]!=0):
-                            valueused[i]= GPIO.input(self.adresseCol[i])
+                        while(which_col[col_number]!=0):
+                            which_col[col_number]= GPIO.input(self.adresseCol[col_number])
                             
-                        self.unpress_function[variable1]()
+                        self.unpress_function[pressed_key]()
                         
                         time.sleep(0.5)
-                        j=4
-                    j=j+1
-            if i==3 :
-                i=0
+                        row_number=4
+                    row_number=row_number+1
+            if col_number==3 :
+                col_number=0
             else :
-                i+=1
+                col_number+=1
                 
-    def do_none(self):
-        pass
+    def do_none(self,var):
+        print("pressed : ",var)
                 
-    def backward(self):
+    def key_8(self,var):
         print("it's gonna move backward")
     
-    def forward(self):
+    def key_2(self,var):
         print("it's gonna move forward")
         
-    def turn_left(self):
+    def key_4(self,var):
         print("it's gonna move turn_left")
+        self.MC["motor_base"].move_min()
         
-    def turn_right(self):
+    def key_6(self,var):
         print("it's gonna move turn_right")
+        self.MC["motor_base"].move_max()
+    
+    def key_B(self,var):
+        print("Bluetooth connection")
+        os.system("bash connect.sh")
+        controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True,motors_dico=self.MC)
+        controller.listen(timeout=10)
+        print("no more Bluetooth connection")
     
     
     
-    def stop_all(self):
+    def stop_all(self,var):
         print("it stopped")
         
         
    
-    def stop_backward(self):
+    def unkey_8(self,var):
         print("it's gonna stop backward")
+        self.MC["motor_pince"].stop_now()
     
-    def stop_forward(self):
+    def unkey_2(self,var):
         print("it's gonna stop forward")
+        self.MC["motor_pince"].stop_now()
         
-    def stop_turn_left(self):
+    def unkey_4(self,var):
         print("it's gonna stop turn_left")
+        self.MC["motor_base"].stop_now()
         
-    def stop_turn_right(self):
+    def unkey_6(self,var):
         print("it's gonna stop turn_right")
+        self.MC["motor_base"].stop_now()
+    
+    def unkey_B(self,var):
+        pass
         
     
                 
-
-key=Keypad()
-key.listener()
+if __name__=="__main__":
+    key=Keypad()
+    key.listener()
