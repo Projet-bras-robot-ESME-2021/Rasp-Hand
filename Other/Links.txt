@@ -1,11 +1,18 @@
-Connect PS4 Joystick: 
+Important link used for the project
+
+-Connect PS4 Joystick: 
 https://pypi.org/project/pyPS4Controller/
 
-Control ServoMotors :
+-Control ServoMotors :
 https://raspberrypi-tutorials.fr/controle-du-servo-moteur-de-raspberry-pi/
 
-Create an interpreter :
+-Create an interpreter :
 https://docs.python.org/fr/3/tutorial/venv.html
 
-Keypad :
+-SSH connection error :
+https://stackabuse.com/how-to-fix-warning-remote-host-identification-has-changed-on-mac-and-linux/
+
+
+-Keypad :
 https://maker.pro/raspberry-pi/tutorial/how-to-use-a-keypad-with-a-raspberry-pi-4
+
