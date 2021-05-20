@@ -90,8 +90,9 @@ class Keypad:
                         
                         while(which_col[col_number]!=0):
                             which_col[col_number]= GPIO.input(self.adresseCol[col_number])
+                            self.press_function[pressed_key](self.nombreused[pressed_key])
                             
-                        self.unpress_function[pressed_key]()
+                        self.unpress_function[pressed_key](self.nombreused[pressed_key])
                         
                         time.sleep(0.5)
                         row_number=4
@@ -111,19 +112,21 @@ class Keypad:
         print("it's gonna move forward")
         
     def key_4(self,var):
-        print("it's gonna move turn_left")
+        
         self.MC["motor_base"].move_min()
         
     def key_6(self,var):
-        print("it's gonna move turn_right")
+        
         self.MC["motor_base"].move_max()
     
     def key_B(self,var):
         print("Bluetooth connection")
-        os.system("bash connect.sh")
-        controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True,motors_dico=self.MC)
-        controller.listen(timeout=10)
-        print("no more Bluetooth connection")
+        try :
+            os.system("bash /home/pi/connect.sh")
+            controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True,motors_dico=self.MC)
+            controller.listen(timeout=10)
+        except:
+            print("no more Bluetooth connection")
     
     
     
@@ -151,8 +154,4 @@ class Keypad:
     def unkey_B(self,var):
         pass
         
-    
-                
-if __name__=="__main__":
-    key=Keypad()
-    key.listener()
+
