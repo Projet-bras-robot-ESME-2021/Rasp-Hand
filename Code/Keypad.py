@@ -45,7 +45,7 @@ class Keypad:
         self.press_function= [self.do_none,self.key_4,self.do_none,self.key_etoile,
                               self.key_2,self.do_none,self.key_8,self.do_none,
                               self.do_none,self.key_6,self.do_none,self.key_diez,
-                              self.keyA,self.key_B,self.do_none,self.key_D]
+                              self.key_A,self.key_B,self.do_none,self.key_D]
         self.unpress_function= [self.do_none,self.unkey_4,self.do_none,self.unkey_etoile,
                                 self.unkey_2,self.do_none,self.unkey_8,self.do_none,
                                 self.do_none,self.unkey_6,self.do_none,self.unkey_diez,
@@ -106,10 +106,10 @@ class Keypad:
         print("pressed : ",var)
                 
     def key_8(self,var):
-        self.MC["motor_art_1"].move_min1()
+        self.MC["motor_art_1"].move_min()
     
     def key_2(self,var):
-        self.MC["motor_art_1"].move_max1()
+        self.MC["motor_art_1"].move_max()
         
     def key_4(self,var):
         self.MC["motor_base"].move_min1()
@@ -125,10 +125,10 @@ class Keypad:
 
 
     def key_A(self,var):
-        self.MC["motor_art_2"].move_min1()
+        self.MC["motor_art_2"].move_min()
 
     def key_B(self,var):
-        self.MC["motor_art_2"].move_max1()
+        self.MC["motor_art_2"].move_max()
  
     def key_D(self,var):
         print("Bluetooth connection")

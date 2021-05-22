@@ -3,10 +3,10 @@ from Keypad import Keypad
 import os
 
 def init_all():
-    base_motor=MotorControl(gpio_motor=27,initpos=30)
-    pince_motor=MotorControl(gpio_motor=17,initpos=8.5)
-    art1_motor=MotorControl(gpio_motor=22)
-    art2_motor=MotorControl(gpio_motor=10)
+    base_motor=MotorControl(gpio_motor=17,initpos=30)
+    pince_motor=MotorControl(gpio_motor=10,initpos=8.5)
+    art1_motor=MotorControl(gpio_motor=27)
+    art2_motor=MotorControl(gpio_motor=22)
     
     motor_dict= {
         "motor_base":base_motor,
