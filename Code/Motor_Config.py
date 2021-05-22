@@ -36,14 +36,14 @@ class MotorControl:
         if self.position<self.pos_max :
             self.position+=1
         self.motor.ChangeDutyCycle(self.position)
-        time.sleep(0.005)
+        time.sleep(0.01)
         print(self.position)
 
     def move_min(self):
         if self.position>self.pos_min :
             self.position-=1
         self.motor.ChangeDutyCycle(self.position)
-        time.sleep(0.005)
+        time.sleep(0.01)
         print(self.position)
 
     def stop_now(self):

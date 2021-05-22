@@ -90,7 +90,6 @@ class Keypad:
                         
                         while(which_col[col_number]!=0):
                             which_col[col_number]= GPIO.input(self.adresseCol[col_number])
-                            self.press_function[pressed_key](self.nombreused[pressed_key])
                             
                         self.unpress_function[pressed_key](self.nombreused[pressed_key])
                         
@@ -112,12 +111,10 @@ class Keypad:
         print("it's gonna move forward")
         
     def key_4(self,var):
-        
-        self.MC["motor_base"].move_min()
+        self.MC["motor_base"].move_min1()
         
     def key_6(self,var):
-        
-        self.MC["motor_base"].move_max()
+        self.MC["motor_base"].move_max1()
     
     def key_B(self,var):
         print("Bluetooth connection")
