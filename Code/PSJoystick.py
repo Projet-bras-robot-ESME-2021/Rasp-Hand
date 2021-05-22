@@ -23,57 +23,74 @@ class MyController(Controller):
         
     def on_triangle_press(self):
         print("on_triangle_press")
-        self.MC["motor_base"].move_max()
+        
 
     def on_triangle_release(self):
         print("on_triangle_release")
-        self.MC["motor_base"].stop_now()
+
+    def on_L1_press(self):
+        self.MC["motor_pince"].move_min1()
+
+    def on_L1_release(self):
+        self.MC["motor_pince"].stop_now()
+
+    def on_R1_press(self):
+        self.MC["motor_pince"]. move_max1()
+
+    def on_R1_release(self):
+        self.MC["motor_pince"].stop_now()
+        
 
 
     def on_circle_press(self):
         print("on_circle_press")
-        self.MC["motor_pince"].move_min()
+        self.MC["motor_base"].move_min()
         
     def on_circle_release(self):
         print("on_circle_release")
-        self.MC["motor_pince"].stop_now()
+        self.MC["motor_base"].stop_now()
         
         
     def on_square_press(self):
         print("on_square_press")
-        self.MC["motor_pince"].move_max()
+        self.MC["motor_base"].move_max()
 
     def on_square_release(self):
         print("on_square_release")
-        self.MC["motor_pince"].stop_now()
+        self.MC["motor_base"].stop_now()
         
         
         
+    
     def on_L3_up(self, value):
-        print("on_L3_up")
+        self.MC["motor_art_1"].move_max()
 
     def on_L3_down(self, value):
-        print("on_L3_down")
-    
-    def on_L3_left(self, value):
-        print("on_L3_left ",value)
-        self.MC["motor_base"].move_max()
-
-    def on_L3_right(self, value):
-        print("on_L3_right ",value)
-        self.MC["motor_base"].move_min()
+        self.MC["motor_art_1"].move_min()
 
     def on_L3_y_at_rest(self):
-        """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_y_at_rest")
-        self.MC["motor_base"].stop_now()
+        self.MC["motor_art_1"].stop_now()
 
     def on_L3_x_at_rest(self):
-        """L3 joystick is at rest after the joystick was moved and let go off"""
         print("on_L3_x_at_rest")
-        self.MC["motor_base"].stop_now()
+        self.MC["motor_art_1"].stop_now()
         
         
+    def on_R3_up(self, value):
+        self.MC["motor_art_2"].move_max()
+
+    def on_R3_down(self, value):
+        self.MC["motor_art_2"].move_min()
+
+    def on_R3_y_at_rest(self):
+        print("on_L3_y_at_rest")
+        self.MC["motor_art_2"].stop_now()
+
+    def on_R3_x_at_rest(self):
+        print("on_L3_x_at_rest")
+        self.MC["motor_art_2"].stop_now()
+
         
         
     def on_up_arrow_press(self):
