@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 class MotorControl:
-    def __init__(self,gpio_motor,initpos=0,pos_min=15,pos_max=75):
+    def __init__(self,gpio_motor,initpos=0,pos_min=15,pos_max=75,frequency=300):
         GPIO.setmode(GPIO.BCM)
         
         #Motor1
@@ -13,7 +13,7 @@ class MotorControl:
         #PWM Intialisation
         servo_pin = gpio_motor
         GPIO.setup(servo_pin, GPIO.OUT)
-        self.motor = GPIO.PWM(servo_pin, 300)
+        self.motor = GPIO.PWM(servo_pin, frequency)
         self.motor.start(initpos)
         self.position=initpos
 

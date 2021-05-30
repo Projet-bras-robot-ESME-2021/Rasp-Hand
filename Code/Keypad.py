@@ -42,12 +42,12 @@ class Keypad:
 
         self.adresseRow=[Row1,Row2,Row3,Row4]
         self.adresseCol=[Col1, Col2, Col3, Col4]
-        self.press_function= [self.do_none,self.key_4,self.do_none,self.key_etoile,
-                              self.key_2,self.do_none,self.key_8,self.do_none,
+        self.press_function= [self.do_none,self.key_4,self.do_none,self.do_none,
+                              self.key_2,self.do_none,self.key_8,self.key_0,
                               self.do_none,self.key_6,self.do_none,self.key_diez,
-                              self.key_A,self.key_B,self.do_none,self.key_D]
-        self.unpress_function= [self.do_none,self.unkey_4,self.do_none,self.unkey_etoile,
-                                self.unkey_2,self.do_none,self.unkey_8,self.do_none,
+                              self.key_A,self.key_B,self.key_C,self.key_D]
+        self.unpress_function= [self.do_none,self.unkey_4,self.do_none,self.do_none,
+                                self.unkey_2,self.do_none,self.unkey_8,self.unkey_0,
                                 self.do_none,self.unkey_6,self.do_none,self.unkey_diez,
                                 self.unkey_A,self.unkey_B,self.do_none,self.do_none]
         self.nombreused= ['1','4','7','*',
@@ -85,14 +85,15 @@ class Keypad:
                         which_col[col_number]= GPIO.input(self.adresseCol[col_number])
                         pressed_key= col_number*4 +row_number
                         
-                        self.press_function[pressed_key](self.nombreused[pressed_key])
+                        #self.press_function[pressed_key](self.nombreused[pressed_key])
                         
-                        
+                        print("pressed :",self.nombreused[pressed_key])
+        
                         while(which_col[col_number]!=0):
-                            self.press_function[pressed_key](self.nombreused[pressed_key])
+                            #self.press_function[pressed_key](self.nombreused[pressed_key])
                             which_col[col_number]= GPIO.input(self.adresseCol[col_number])
                             
-                        self.unpress_function[pressed_key](self.nombreused[pressed_key])
+                        #self.unpress_function[pressed_key](self.nombreused[pressed_key])
                         
                         time.sleep(0.5)
                         row_number=4
@@ -117,7 +118,7 @@ class Keypad:
     def key_6(self,var):
         self.MC["motor_base"].move_max1()
 
-    def key_etoile(self,var):
+    def key_0(self,var):
         self.MC["motor_pince"].move_max1()
 
     def key_diez(self,var):
@@ -141,16 +142,21 @@ class Keypad:
     
     
     
-    def stop_all(self,var):
-        print("it stopped")
+    def key_C(self,var):
+        self.MC["motor_base"].stop_now()
+        self.MC["motor_art_1"].stop_now()
+        self.MC["motor_art_2"].stop_now()
+        self.MC["motor_pince"].stop_now()
         
         
    
     def unkey_8(self,var):
-        self.MC["motor_art_1"].stop_now()
+        #self.MC["motor_art_1"].stop_now()
+        pass
     
     def unkey_2(self,var):
-        self.MC["motor_art_1"].stop_now()
+        #self.MC["motor_art_1"].stop_now()
+        pass
         
     def unkey_4(self,var):
         self.MC["motor_base"].stop_now()
@@ -159,7 +165,7 @@ class Keypad:
         self.MC["motor_base"].stop_now()
 
 
-    def unkey_etoile(self,var):
+    def unkey_0(self,var):
         self.MC["motor_pince"].stop_now()
 
     def unkey_diez(self,var):
@@ -167,9 +173,10 @@ class Keypad:
 
     
     def unkey_B(self,var):
-        self.MC["motor_art_2"].stop_now()   
+        #self.MC["motor_art_2"].stop_now()   
+        pass
 
     def unkey_A(self,var):
-        self.MC["motor_art_2"].stop_now()
-        
+        #self.MC["motor_art_2"].stop_now()
+        pass
 
