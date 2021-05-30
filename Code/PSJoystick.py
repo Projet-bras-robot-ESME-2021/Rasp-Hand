@@ -21,7 +21,7 @@ class MyController(Controller):
         self.MC["motor_pince"].stop_now()
 
     def on_R1_press(self):
-        self.MC["motor_pince"]. move_max1()
+        self.MC["motor_pince"].move_max1()
 
     def on_R1_release(self):
         self.MC["motor_pince"].stop_now()
