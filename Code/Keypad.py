@@ -90,10 +90,10 @@ class Keypad:
                         print("pressed :",self.nombreused[pressed_key])
         
                         while(which_col[col_number]!=0):
-                            #self.press_function[pressed_key](self.nombreused[pressed_key])
+                            self.press_function[pressed_key](self.nombreused[pressed_key])
                             which_col[col_number]= GPIO.input(self.adresseCol[col_number])
                             
-                        #self.unpress_function[pressed_key](self.nombreused[pressed_key])
+                        self.unpress_function[pressed_key](self.nombreused[pressed_key])
                         
                         time.sleep(0.5)
                         row_number=4
