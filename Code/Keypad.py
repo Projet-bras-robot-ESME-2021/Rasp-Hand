@@ -108,10 +108,10 @@ class Keypad:
         
         
     #Controle de la Base
-    def key_4(self,var):
-    	self.MC["motor_base"].move_min1()
-        
     def key_6(self,var):
+        self.MC["motor_base"].move_min1()
+        
+    def key_4(self,var):
         self.MC["motor_base"].move_max1() 
         
     def unkey_4(self,var):
@@ -121,10 +121,10 @@ class Keypad:
         self.MC["motor_base"].stop_now()        
         
     #Controle Articulation 1        
-    def key_8(self,var):
+    def key_2(self,var):
         self.MC["motor_art_1"].move_min()
     
-    def key_2(self,var):
+    def key_8(self,var):
         self.MC["motor_art_1"].move_max()
         
     def unkey_8(self,var):
@@ -155,21 +155,21 @@ class Keypad:
 
     
     #Controle de la Pince
-    def key_0(self,var):
+    def key_B(self,var):
         self.MC["motor_pince"].move_max1()
 
-    def key_diez(self,var):
+    def key_A(self,var):
         self.MC["motor_pince"].move_min1() 
     
-    def unkey_0(self,var):
-        self.MC["motor_pince"].stop_now()
+    def unkey_A(self,var):
+        self.MC["motor_pince"].move_motor(7)
 
-    def unkey_diez(self,var):
+    def unkey_B(self,var):
         self.MC["motor_pince"].stop_now()
         
         
     #Connection a la manette
-    def key_etoile(self,var):
+    def key_C(self,var):
         print("Bluetooth connection")
         try :
             os.system("bash /home/pi/connect.sh")
@@ -186,28 +186,33 @@ class Keypad:
         self.MC["motor_pince"].stop_now()
         
        
-    def key_A(self,var):
+    def key_diez(self,var):
         pass       
     def key_3(self,var):
         pass       
-    def key_C(self,var):
+    def key_etoile(self,var):
         pass       
-    def key_B(self,var):
+    def key_0(self,var):
         pass       
     def key_9(self,var):
         pass              
     def key_D(self,var):
         pass  
     
-    def unkey_A(self,var):
+    def unkey_diez(self,var):
         pass       
     def unkey_3(self,var):
         pass       
-    def unkey_C(self,var):
+    def unkey_0(self,var):
         pass       
-    def unkey_B(self,var):
+    def unkey_etoile(self,var):
         pass       
     def unkey_9(self,var):
         pass              
     def unkey_D(self,var):
-        pass   
+        pass
+    def unkey_5(self,var):
+        pass
+    def unkey_C(self,var):
+        pass
+

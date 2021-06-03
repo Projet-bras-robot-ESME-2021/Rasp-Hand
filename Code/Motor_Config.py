@@ -18,9 +18,7 @@ class MotorControl:
         self.position=initpos
 
         #Put the PWM to 0 so the motor doesn't vibrate
-        if initpos != 0:
-                time.sleep(1)
-                self.motor.ChangeDutyCycle(0)
+        
             
 
     def move_motor(self,value):
@@ -36,14 +34,14 @@ class MotorControl:
         if self.position<self.pos_max :
             self.position+=1
         self.motor.ChangeDutyCycle(self.position)
-        time.sleep(0.01)
+        time.sleep(0.02)
         print(self.position)
 
     def move_min(self):
         if self.position>self.pos_min :
             self.position-=1
         self.motor.ChangeDutyCycle(self.position)
-        time.sleep(0.01)
+        time.sleep(0.02)
         print(self.position)
 
     def stop_now(self):
